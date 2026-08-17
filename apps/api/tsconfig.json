@@ -4,7 +4,6 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "declaration": false,
-    "incremental": true,
     "sourceMap": true,
     "strictPropertyInitialization": false
   },
