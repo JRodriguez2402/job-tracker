@@ -17,6 +17,9 @@ export const es = {
     title: 'Seguimiento de postulaciones',
     subtitle: 'Gestiona tus postulaciones de empleo',
   },
+  common: {
+    loading: 'Cargando…',
+  },
   list: {
     empty: 'Aún no tienes postulaciones. ¡Crea la primera!',
     new: 'Nueva postulación',
@@ -37,6 +40,23 @@ export const es = {
     cancel: 'Cancelar',
     creating: 'Nueva postulación',
     editing: 'Editar postulación',
+  },
+  auth: {
+    loginTitle: 'Iniciar sesión',
+    registerTitle: 'Crear cuenta',
+    email: 'Correo',
+    password: 'Contraseña',
+    passwordHint: 'Mínimo 8 caracteres',
+    loginSubmit: 'Entrar',
+    registerSubmit: 'Registrarme',
+    logout: 'Cerrar sesión',
+    noAccount: '¿No tienes cuenta?',
+    registerLink: 'Regístrate',
+    haveAccount: '¿Ya tienes cuenta?',
+    loginLink: 'Inicia sesión',
+    invalidCredentials: 'Correo o contraseña incorrectos.',
+    emailTaken: 'Ese correo ya está registrado.',
+    registerError: 'No se pudo crear la cuenta. Revisa los datos.',
   },
   stage: stageLabels,
   errors: {
