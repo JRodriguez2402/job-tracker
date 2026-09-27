@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { databaseOptions } from './database.config';
 import { ApplicationsModule } from './applications/applications.module';
 import { AuthModule } from './auth/auth.module';
 
@@ -9,21 +10,11 @@ import { AuthModule } from './auth/auth.module';
     // Load environment variables (.env) and expose them app-wide.
     ConfigModule.forRoot({ isGlobal: true }),
 
-    // Configure the Postgres connection asynchronously, reading from the env.
-    TypeOrmModule.forRootAsync({
-      inject: [ConfigService],
-      useFactory: (config: ConfigService): TypeOrmModuleOptions => ({
-        type: 'postgres',
-        host: config.get<string>('DB_HOST', 'localhost'),
-        port: Number(config.get<string>('DB_PORT') ?? 5432),
-        username: config.get<string>('DB_USER', 'jobtracker'),
-        password: config.get<string>('DB_PASSWORD', 'jobtracker'),
-        database: config.get<string>('DB_NAME', 'jobtracker'),
-        autoLoadEntities: true, // pick up entities registered by feature modules
-        // Dev only: auto-creates/updates tables. Never true against real data.
-        synchronize: config.get<string>('DB_SYNCHRONIZE') === 'true',
-      }),
-    }),
+    // databaseOptions() reads process.env, which ConfigModule has populated by
+    // the time this factory runs. It supports DATABASE_URL + SSL (production)
+    // or the discrete DB_* vars (local dev).
+    TypeOrmModule.forRootAsync({ useFactory: () => databaseOptions() }),
+
     ApplicationsModule,
     AuthModule,
   ],
