@@ -8,6 +8,8 @@
   "scripts": {
     "dev": "npm run build -w @job-tracker/shared && concurrently -n shared,api,web -c gray,blue,green \"npm run dev -w @job-tracker/shared\" \"npm run dev -w @job-tracker/api\" \"npm run dev -w @job-tracker/web\"",
     "build": "npm run build -w @job-tracker/shared && npm run build -w @job-tracker/api && npm run build -w @job-tracker/web",
+    "build:backend": "npm install --include=dev && npm run build -w @job-tracker/shared && npm run build -w @job-tracker/api",
+    "start:backend": "npm run start -w @job-tracker/api",
     "test": "npm run test --workspaces --if-present",
     "lint": "npm run lint --workspaces --if-present",
     "db:up": "docker compose up -d",
