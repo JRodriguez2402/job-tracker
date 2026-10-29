@@ -13,37 +13,43 @@ export class ApplicationsService {
     private readonly repo: Repository<ApplicationEntity>,
   ) {}
 
-  findAll(): Promise<ApplicationEntity[]> {
-    return this.repo.find({ order: { createdAt: 'DESC' } });
+  // Every method takes the owner's id and scopes its query by it, so a user can
+  // never read or touch another user's applications.
+  findAll(userId: string): Promise<ApplicationEntity[]> {
+    return this.repo.find({ where: { userId }, order: { createdAt: 'DESC' } });
   }
 
-  async findOne(id: string): Promise<ApplicationEntity> {
-    const found = await this.repo.findOne({ where: { id } });
+  async findOne(id: string, userId: string): Promise<ApplicationEntity> {
+    const found = await this.repo.findOne({ where: { id, userId } });
     if (!found) {
-      throw new NotFoundException(`Application ${id} not found`);
+      throw new NotFoundException(`No existe la postulación ${id}`);
     }
     return found;
   }
 
-  create(dto: CreateApplicationDto): Promise<ApplicationEntity> {
-    const entity = this.repo.create(dto); // build the instance in memory
-    return this.repo.save(entity); // INSERT
+  create(dto: CreateApplicationDto, userId: string): Promise<ApplicationEntity> {
+    const entity = this.repo.create({ ...dto, userId });
+    return this.repo.save(entity);
   }
 
-  async update(id: string, dto: UpdateApplicationDto): Promise<ApplicationEntity> {
-    // preload loads the existing row and merges the DTO changes onto it.
-    // It returns undefined when the id does not exist.
+  async update(
+    id: string,
+    dto: UpdateApplicationDto,
+    userId: string,
+  ): Promise<ApplicationEntity> {
+    // Ownership + existence check first (throws 404 if not the owner's row).
+    await this.findOne(id, userId);
     const entity = await this.repo.preload({ id, ...dto });
     if (!entity) {
-      throw new NotFoundException(`Application ${id} not found`);
+      throw new NotFoundException(`No existe la postulación ${id}`);
     }
-    return this.repo.save(entity); // UPDATE
+    return this.repo.save(entity);
   }
 
-  async remove(id: string): Promise<void> {
-    const result = await this.repo.delete(id);
+  async remove(id: string, userId: string): Promise<void> {
+    const result = await this.repo.delete({ id, userId });
     if (!result.affected) {
-      throw new NotFoundException(`Application ${id} not found`);
+      throw new NotFoundException(`No existe la postulación ${id}`);
     }
   }
 }
