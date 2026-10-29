@@ -2,10 +2,14 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  Index,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Application, ApplicationStage } from '@job-tracker/shared';
+import { UserEntity } from '../auth/user.entity';
 
 // Maps this class to the 'applications' table. `implements Application` keeps the
 // table in sync with the shared type: drop or mistype a field and the build fails.
@@ -39,6 +43,16 @@ export class ApplicationEntity implements Application {
 
   @Column({ type: 'text', nullable: true })
   notes: string | null;
+
+  // Owner. Every query is scoped by this so users only see their own rows.
+  // Deleting a user removes their applications (onDelete: CASCADE).
+  @ManyToOne(() => UserEntity, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'userId' })
+  user?: UserEntity;
+
+  @Index()
+  @Column()
+  userId: string;
 
   // Managed by TypeORM: set on insert / bumped on every update.
   @CreateDateColumn()
