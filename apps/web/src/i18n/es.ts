@@ -1,8 +1,7 @@
 import { ApplicationStage } from '@job-tracker/shared';
 
-// Spanish dictionary — the ONLY visible text lives here, never hardcoded in
-// components. English is added in Milestone 4. Typing the stage labels as a
-// Record<ApplicationStage, string> forces us to translate every stage.
+// Spanish dictionary. Its shape defines the `Dictionary` type that every other
+// locale must match, so a missing key in another language is a compile error.
 const stageLabels: Record<ApplicationStage, string> = {
   [ApplicationStage.Saved]: 'Guardada',
   [ApplicationStage.Applied]: 'Aplicada',
@@ -64,6 +63,7 @@ export const es = {
     save: 'No se pudo guardar. Revisa los datos.',
     delete: 'No se pudo eliminar.',
   },
-} as const;
+};
 
+// The shape every locale dictionary must satisfy.
 export type Dictionary = typeof es;

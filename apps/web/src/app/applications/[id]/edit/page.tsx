@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import type { Application } from '@job-tracker/shared';
 import { api } from '@/lib/api';
-import { getDictionary } from '@/lib/i18n';
+import { useDictionary } from '@/lib/LocaleProvider';
 import { useSession } from '@/lib/useSession';
 import { AppHeader } from '@/components/AppHeader';
 import { ApplicationForm } from '@/components/ApplicationForm';
@@ -13,7 +13,7 @@ import { ApplicationForm } from '@/components/ApplicationForm';
 // fetches the record on the client (that's where the token lives), then hands
 // it to the form as initial data.
 export default function EditApplicationPage() {
-  const t = getDictionary();
+  const t = useDictionary();
   const user = useSession();
   const params = useParams<{ id: string }>();
   const [application, setApplication] = useState<Application | null>(null);

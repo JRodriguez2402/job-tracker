@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { ApplicationStage, type Application } from '@job-tracker/shared';
 import { api } from '@/lib/api';
-import { getDictionary } from '@/lib/i18n';
+import { useDictionary } from '@/lib/LocaleProvider';
 import { useSession } from '@/lib/useSession';
 import { AppHeader } from '@/components/AppHeader';
 
@@ -21,7 +21,7 @@ const STAGE_COLORS: Record<ApplicationStage, string> = {
 // Protected home page. With a localStorage token, data is fetched on the client
 // (the server can't read the token), so this is a Client Component.
 export default function HomePage() {
-  const t = getDictionary();
+  const t = useDictionary();
   const user = useSession();
   const [items, setItems] = useState<Application[] | null>(null);
   const [error, setError] = useState(false);

@@ -1,13 +1,13 @@
 'use client';
 
-import { getDictionary } from '@/lib/i18n';
+import { useDictionary } from '@/lib/LocaleProvider';
 import { useSession } from '@/lib/useSession';
 import { AppHeader } from '@/components/AppHeader';
 import { ApplicationForm } from '@/components/ApplicationForm';
 
 // Create mode: protected page that renders the form with no initial data.
 export default function NewApplicationPage() {
-  const t = getDictionary();
+  const t = useDictionary();
   const user = useSession();
   if (!user) return null;
 

@@ -10,7 +10,7 @@ import {
   type CreateApplicationInput,
 } from '@job-tracker/shared';
 import { api } from '@/lib/api';
-import { getDictionary } from '@/lib/i18n';
+import { useDictionary } from '@/lib/LocaleProvider';
 
 type Props = {
   // When provided, the form edits this application; otherwise it creates one.
@@ -22,7 +22,7 @@ const inputClass =
 const labelClass = 'mb-1 block text-sm font-medium';
 
 export function ApplicationForm({ initial }: Props) {
-  const t = getDictionary();
+  const t = useDictionary();
   const router = useRouter();
 
   const [company, setCompany] = useState(initial?.company ?? '');

@@ -5,13 +5,14 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { api } from '@/lib/api';
 import { setSession } from '@/lib/auth';
-import { getDictionary } from '@/lib/i18n';
+import { useDictionary } from '@/lib/LocaleProvider';
+import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 
 const inputClass =
   'w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm outline-none focus:border-blue-500 dark:border-gray-700 dark:bg-gray-900';
 
 export default function LoginPage() {
-  const t = getDictionary();
+  const t = useDictionary();
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -33,7 +34,10 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="mx-auto flex min-h-dvh w-full max-w-sm flex-col justify-center px-4 py-10">
+    <main className="relative mx-auto flex min-h-dvh w-full max-w-sm flex-col justify-center px-4 py-10">
+      <div className="absolute right-4 top-4">
+        <LanguageSwitcher />
+      </div>
       <h1 className="mb-1 text-2xl font-bold tracking-tight">
         {t.auth.loginTitle}
       </h1>
