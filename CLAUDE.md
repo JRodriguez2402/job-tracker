@@ -42,10 +42,11 @@ Bilingüe (ES/EN), con roles de dueño e invitado de solo lectura.
 
 ## Estado actual
 
-Hito 1 — CRUD local del backend (NestJS + Postgres) funcionando. Frontend en construcción.
+Los 6 hitos del plan están completos: CRUD, autenticación (JWT), despliegue en producción
+(Vercel + Render + Neon), bilingüe ES/EN, dashboard del embudo + vista compartida de solo
+lectura, y tests + CI (GitHub Actions).
 
 ## Pendientes
 
-- [ ] i18n completo
-- [ ] Vista compartida de solo lectura
-- [ ] Tests del servicio de aplicaciones
+- [ ] (opcional) Endurecer auth: mover el token a una cookie httpOnly
+- [ ] (opcional) Más cobertura de tests (e2e)

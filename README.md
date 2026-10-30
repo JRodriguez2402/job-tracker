@@ -1,5 +1,7 @@
 # Job Tracker
 
+![CI](https://github.com/JRodriguez2402/job-tracker/actions/workflows/ci.yml/badge.svg)
+
 Aplicación full-stack para gestionar mis propias postulaciones de empleo: registro cada vacante, la muevo por las etapas del proceso y llevo el seguimiento en un solo lugar. Con autenticación (cada usuario ve solo lo suyo), bilingüe por diseño y desplegada en producción.
 
 > 🔗 **[Ver en vivo](https://job-tracker-phi-jet.vercel.app)** · Usuario de prueba: **demo@demo.com** / **demo1234**
@@ -9,7 +11,8 @@ Aplicación full-stack para gestionar mis propias postulaciones de empleo: regis
 - **Autenticación** con JWT: registro, login y rutas protegidas. Cada usuario ve únicamente sus postulaciones.
 - **CRUD** completo: empresa, cargo, enlace, salario, stack, fecha y notas.
 - **Etapas** del proceso: Guardada → Aplicada → Screening → Técnica → Oferta → Rechazada.
-- Interfaz en español, con **toda** la UI saliendo de un diccionario i18n (inglés en curso).
+- **Bilingüe ES/EN** con selector de idioma y persistencia (toda la UI vía i18n).
+- **Dashboard** del embudo por etapas y **vista compartida de solo lectura** por enlace.
 - Validación de la entrada en el backend con DTOs; diseño responsive y tema claro/oscuro.
 
 ## Stack
@@ -64,9 +67,9 @@ npm run dev             # levanta front + back
 - [x] **Hito 1** — CRUD local
 - [x] **Hito 2** — Autenticación (JWT, por usuario)
 - [x] **Hito 3** — Despliegue a producción (link vivo + usuario demo)
-- [ ] Hito 4 — Bilingüe completo (ES/EN con selector y persistencia)
-- [ ] Hito 5 — Dashboard del embudo + vista compartida de solo lectura
-- [ ] Hito 6 — Tests de la lógica crítica + CI
+- [x] **Hito 4** — Bilingüe completo (ES/EN con selector y persistencia)
+- [x] **Hito 5** — Dashboard del embudo + vista compartida de solo lectura
+- [x] **Hito 6** — Tests de la lógica crítica + CI (GitHub Actions)
 
 ---
 
