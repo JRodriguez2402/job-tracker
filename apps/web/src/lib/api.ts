@@ -62,6 +62,9 @@ export const api = {
   remove: (id: string) =>
     request<void>(`/applications/${id}`, { method: 'DELETE' }),
 
+  // Public read-only view (no auth): a user's applications by their id.
+  shared: (userId: string) => request<Application[]>(`/share/${userId}`),
+
   register: (credentials: AuthCredentials) =>
     request<AuthResponse>('/auth/register', {
       method: 'POST',

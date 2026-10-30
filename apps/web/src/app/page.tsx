@@ -7,6 +7,8 @@ import { api } from '@/lib/api';
 import { useDictionary } from '@/lib/LocaleProvider';
 import { useSession } from '@/lib/useSession';
 import { AppHeader } from '@/components/AppHeader';
+import { FunnelStats } from '@/components/FunnelStats';
+import { ShareButton } from '@/components/ShareButton';
 
 // Tailwind classes for each stage badge.
 const STAGE_COLORS: Record<ApplicationStage, string> = {
@@ -55,13 +57,18 @@ export default function HomePage() {
             <h1 className="text-2xl font-bold tracking-tight">{t.app.title}</h1>
             <p className="text-sm text-gray-500">{t.app.subtitle}</p>
           </div>
-          <Link
-            href="/applications/new"
-            className="shrink-0 rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
-          >
-            {t.list.new}
-          </Link>
+          <div className="flex shrink-0 items-center gap-2">
+            <ShareButton userId={user.id} />
+            <Link
+              href="/applications/new"
+              className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
+            >
+              {t.list.new}
+            </Link>
+          </div>
         </div>
+
+        {items && items.length > 0 && <FunnelStats applications={items} />}
 
         {error ? (
           <p className="rounded-lg border border-rose-200 bg-rose-50 p-6 text-center text-rose-700 dark:border-rose-900 dark:bg-rose-950/40">

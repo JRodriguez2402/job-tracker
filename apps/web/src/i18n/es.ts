@@ -19,6 +19,10 @@ export const es = {
   common: {
     loading: 'Cargando…',
   },
+  dashboard: {
+    title: 'Tu embudo',
+    total: 'postulaciones',
+  },
   list: {
     empty: 'Aún no tienes postulaciones. ¡Crea la primera!',
     new: 'Nueva postulación',
@@ -58,6 +62,11 @@ export const es = {
     registerError: 'No se pudo crear la cuenta. Revisa los datos.',
   },
   stage: stageLabels,
+  share: {
+    button: 'Compartir',
+    copied: '¡Enlace copiado!',
+    readOnly: 'Vista de solo lectura',
+  },
   errors: {
     load: 'No se pudieron cargar las postulaciones.',
     save: 'No se pudo guardar. Revisa los datos.',

@@ -20,6 +20,10 @@ export const en: Dictionary = {
   common: {
     loading: 'Loading…',
   },
+  dashboard: {
+    title: 'Your funnel',
+    total: 'applications',
+  },
   list: {
     empty: "You don't have any applications yet. Create your first one!",
     new: 'New application',
@@ -59,6 +63,11 @@ export const en: Dictionary = {
     registerError: "Couldn't create the account. Check your details.",
   },
   stage: stageLabels,
+  share: {
+    button: 'Share',
+    copied: 'Link copied!',
+    readOnly: 'Read-only view',
+  },
   errors: {
     load: "Couldn't load the applications.",
     save: "Couldn't save. Check your details.",
